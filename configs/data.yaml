@@ -1,0 +1,39 @@
+dataset:
+  repo_id: UNEP-IMEO/MARS-S2L
+  repo_type: dataset
+  revision: main          # pinned to a commit hash in Phase 1
+  metadata_filename: validated_images_all.csv
+
+paths:
+  metadata_dir: data/raw/metadata
+
+splits:                   # verified by audit 0.2
+  train: train_2023
+  val: val_2023
+  test: test_2023
+  excluded: [Not Used]    # not part of the official splits
+
+columns:
+  required:
+    - id_loc_image
+    - id_location
+    - split_name
+    - isplume
+    - satellite
+    - tile_date
+    - sector
+    - offshore
+    - percentage_clear
+    - country
+  leakage:                # never used as model input for plume presence
+    - ch4path
+    - plumepath           # found in audit 0.2, not on dataset card
+    - ch4_fluxrate
+    - ch4_fluxrate_std
+    - plume
+    - notified
+    - observability
+    - window_row_off      # found in audit 0.2: present only for positives
+    - window_col_off
+    - window_width
+    - window_height
